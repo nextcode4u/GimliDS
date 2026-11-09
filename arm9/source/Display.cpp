@@ -39,6 +39,7 @@
 
 #include "Display.h"
 #include "main.h"
+#include "argv_launch.h"
 #include "IEC.h"
 #include "C64.h"
 #include "1541d64.h"
@@ -456,6 +457,8 @@ int init_graphics(void)
         return -1;
     }
 
+    argv_launch_remember_cwd();
+
     chdir("/roms");
     chdir("c64");
 
@@ -716,6 +719,8 @@ void C64Display::PollKeyboard(uint8 *key_matrix, uint8 *rev_matrix, uint8 *joyst
             TheC64->Reset();
         }
     }
+
+    argv_launch_poll(TheC64);
 
     scanKeys();
 

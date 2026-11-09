@@ -38,6 +38,7 @@
 #include "sysdeps.h"
 
 #include "main.h"
+#include "argv_launch.h"
 #include "C64.h"
 #include "Display.h"
 #include "mainmenu.h"
@@ -136,6 +137,8 @@ int main(int argc, char **argv)
 {
     Frodo *the_app;
 
+    argv_launch_capture(argc, argv);
+
     defaultExceptionHandler();
 
     intro_logo();
@@ -176,30 +179,9 @@ Frodo::Frodo()
 /*
  *  Process command line arguments
  */
-char cmd_line_file[256];
 void Frodo::ArgvReceived(int argc, char **argv)
 {
-    if (argc > 1)
-    {
-        //  We want to start in the directory where the file is being launched...
-        if  (strchr(argv[1], '/') != NULL)
-        {
-            static char  path[128];
-            strcpy(path,  argv[1]);
-            char  *ptr = &path[strlen(path)-1];
-            while (*ptr !=  '/') ptr--;
-            ptr++;
-            strcpy(cmd_line_file,  ptr);
-            *ptr=0;
-            chdir(path);
-        }
-        else
-        {
-            strcpy(cmd_line_file,  argv[1]);
-        }
-
-        ///TODO: Unsure what do do here... we could auto-load and auto-launch the disk/CRT file I guess...
-    }
+    argv_launch_prepare(argc, argv);
 }
 
 
