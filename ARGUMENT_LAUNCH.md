@@ -66,8 +66,10 @@ legacy formatted-output and heap-helper names from the new SDK. The application'
 normal Makefiles and SDK headers are not patched. This is a build option, not an
 upstream SDK migration or proof of hardware timing/audio compatibility.
 
-A complete BlocksDS build and the sanitized host tests passed locally. Actual DS/DSi
-argv launches and title compatibility still require console/emulator validation.
+A complete BlocksDS build and the sanitized host tests passed locally. DSi-mode melonDS checks through Gloam verified argv startup: original BASIC test
+programs ran from PRG and D64, and a cartridge reached its title screen. General
+title compatibility, performance, saves and physical-console behavior remain
+unverified.
 
 ## Keeping up with upstream
 
