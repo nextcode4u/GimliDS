@@ -41,6 +41,34 @@ is replaced without changing the manual media menus or their loaders. The origin
 Makefiles are unchanged. This branch started from upstream commit
 `e99a7e8b2ad65b7dcb93dd5d9feb217eaccc5740`.
 
+## Building
+
+### Optional current BlocksDS build
+
+The original devkitARM/libnds Makefiles remain available with their original SDK
+requirements. To build using current BlocksDS instead, run the separate adapter:
+
+```sh
+python3 tools/build_blocksds.py --clean
+```
+
+Requirements are Python 3.9 or later, BlocksDS 1.25 (including libnds, Maxmod,
+DSWiFi and its asset tools), and the Wonderful ARM GCC toolchain. Local builds used
+Wonderful GCC 16.2. Defaults are `/opt/blocksds/core` and
+`/opt/wonderful/toolchain/gcc-arm-none-eabi/bin`; override them using `--blocksds`
+and `--toolchain`. `BLOCKSDS` also supplies the SDK default. Use `--jobs` to control
+parallel compilation.
+
+The adapter reads upstream's source/include/asset/library lists and writes all
+objects, generated graphics, linker maps and the NDS file under `build/blocksds/`.
+It rebuilds all selected sources each run. A forced compatibility header isolates
+legacy formatted-output and heap-helper names from the new SDK. The application's
+normal Makefiles and SDK headers are not patched. This is a build option, not an
+upstream SDK migration or proof of hardware timing/audio compatibility.
+
+A complete BlocksDS build and the sanitized host tests passed locally. Actual DS/DSi
+argv launches and title compatibility still require console/emulator validation.
+
 ## Keeping up with upstream
 
 The `argv-launch` branch contains the fork additions; `main` is kept as an upstream

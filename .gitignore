@@ -10,3 +10,11 @@ gimli-ds-versions-sized.png
 gimli-ds-versions.png
 
 gimly-subversions.png
+
+# Optional BlocksDS output and generated compiler files.
+/build/
+*.o
+*.d
+*.map
+*.nds
+__pycache__/
